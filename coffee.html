@@ -45,12 +45,20 @@
 
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
+    var drinksOrdered = [];
+
+    var prices = {
+        "brew": 2.05,
+        "espresso": 3.25,
+        "latte": 4.15,
+        "hot chocolate": 2.50
+    };
 
     $("#coffee_image").attr("src", "static/coffee_beans.jpg");
     // var myImage = document.getElementById("coffee_image");
     // myImage.setAttribute('src', "static/coffee_beans.jpg");
 
-    // $("#revenue")
+    
     // var myRevenueMessage = document.getElementById("revenue");
 
     $("#coffee_image").on('click', function () {
@@ -59,12 +67,34 @@
     // myImage.addEventListener('click', function () {
     //     return makeCoffee("brew");
     // });
+    
+    function makeCoffee(drinkType) {
+        drinksOrdered.push(drinkType);
+        console.log(drinksOrdered);
+        $("#coffee_image").attr("src", "static/coffee_machine.jpg");
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 500);
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 1500);
+        console.log(revenue(drinksOrdered, prices));
+        $("#revenue").text("$" + revenue(drinksOrdered, prices));
+        }
 
-    function makeCoffee() {
-         $("#coffee_image").attr("src", "static/coffee_machine.jpg");
-         setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 500);
-         setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 1500);
+    $("#espresso").on("click", function() {return makeCoffee('espresso')});
+    $("#latte").on("click", function() {return makeCoffee('latte')});
+    $("#hot-chocolate").on("click", function() {return makeCoffee('hot chocolate')});
+
+    // espresso.addEventListener('click', function () {return makeCoffee('espresso');});
+    // latte.addEventListener('click', function () {return makeCoffee('latte');});
+    // hotChocolate.addEventListener('click', function () {return makeCoffee('hot chocolate');});
+
+    function revenue(drinksOrder, prices){
+        var totalRevenue = 0;
+        for (i = 0; i<drinksOrder.length; i++){
+            totalRevenue += prices[drinksOrder[i]];
+        }
+
+        return totalRevenue.toFixed(2);
     }
+
 
 </script>
 

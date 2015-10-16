@@ -71,11 +71,26 @@
     function makeCoffee(drinkType) {
         drinksOrdered.push(drinkType);
         console.log(drinksOrdered);
-        $("#coffee_image").attr("src", "static/coffee_machine.jpg");
-        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 500);
-        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 1500);
-        console.log(revenue(drinksOrdered, prices));
+        
+        $("#coffee_image").fadeOut(2000);
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_machine.jpg"); }, 2000);
+        $("#coffee_image").fadeIn(2000);
+        $("#coffee_image").fadeOut(2000);
+        setTimeout(function() { $("#coffee_image").attr("src", "static/barista.jpg"); }, 6000);
+        $("#coffee_image").fadeIn(2000);
+        $("#coffee_image").fadeOut(2000);
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 10000);
+        $("#coffee_image").fadeIn(2000);
+        $("#coffee_image").fadeOut(2000);
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 14000);
+        $("#coffee_image").fadeIn(2000);
+        
+        // $("#coffee_image").attr("src", "static/coffee_machine.jpg");
+        // setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 500);
+        // setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 1500);
+        
         $("#revenue").text("$" + revenue(drinksOrdered, prices));
+        // switchImage("static/coffee_mug.jpg");
         }
 
     $("#espresso").on("click", function() {return makeCoffee('espresso')});
@@ -94,7 +109,6 @@
 
         return totalRevenue.toFixed(2);
     }
-
 
 </script>
 
